@@ -1,6 +1,6 @@
 {
   "name": "Architect on Call — CCA-F Exam Prep",
-  "version": "0.9",
+  "version": "0.90",
   "last_updated": "2026-06-09",
   "delivery_engine": "Claude Code",
   "runtime_adapters": ["CLAUDE.md"],
@@ -9,7 +9,7 @@
   "website": "https://kulanet.com",
   "affiliation": "Independent and unofficial. Not affiliated with or endorsed by Anthropic.",
   "audience": "solution architects preparing for the Claude Certified Architect - Foundations exam",
-  "goal": "Pass CCA-F (>=720/1000) and build durable understanding, by teaching 7 root principles welded to full task-statement coverage, drilled exam tokens, 72% gates, and a 4-of-6 timed mock. Self-contained, project-local, delivered in Claude Code.",
+  "goal": "Prepare for the CCA-F exam by building understanding of 7 root principles across all domains, through hands-on sessions, 72% phase gates, and a 4-of-6 timed practice mock. Self-contained, project-local, delivered in Claude Code.",
   "build_mode": "brownfield-in-place",
   "structure": {
     "sessions_total": 13,
