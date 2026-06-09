@@ -22,6 +22,8 @@ A travel booking agent runs in a loop. After each model response, the loop check
 
 Before reading on: write down one way this exits too early and one way it loops forever.
 
+*(Hint: think about what the model might say instead of the exact phrase "booking confirmed" — and what happens when the model emits a tool call with no text at all.)*
+
 #### What Just Happened
 The loop is watching the model's words instead of reading the API's signal.
 
@@ -43,6 +45,8 @@ Rewrite the loop so it exits based on `stop_reason` only. Handle at minimum:
 The result is a single `if/elif` chain. No text inspection anywhere.
 
 **Exercise B — Trace a three-turn loop.**
+
+Quick setup before you trace: every API call works with a `messages` array — a list of turns in order. Each message has a `role`: `user` (your messages and tool results) or `assistant` (model replies). When the model calls a tool, that's an `assistant` message. When you give back the result, that's a `user` message. With that in mind:
 
 On paper, trace the `messages` array step by step:
 
