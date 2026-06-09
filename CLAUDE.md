@@ -44,21 +44,32 @@ learner walk away with a stale fact as permanent.
   the conversation, not the file operations. Just do it and continue teaching.
 
 ## First-run setup (when `user.json` is missing)
-Ask **only these four**, **one at a time**, terse — no preamble, no chat, no extra questions. Use the
-structured input tool when available.
-1. **Name?**
-2. **Tolerance for bad jokes, 1–10?** (store in `user.json.joke_tolerance`; calibrates how dry to be.)
-3. **Comfort 1–5 on each of the five domains?** (agent loops · tools+MCP · Claude Code config ·
-   prompting+schemas · context+reliability — one line is fine; store in `user.json.comfort`.)
-4. **Prep timeline — 1, 2, or 3 months?** (default 2 if unsure; store in `user.json.prep_timeline` and
-   `progress.json.course_meta.prep_timeline`. Same 13 sessions; only pace/review spacing change:
-   1mo ≈ 3 sessions/wk · 2mo ≈ 1–2/wk · 3mo ≈ 1/wk.)
+Ask **only these four questions**, **one at a time**, as plain sentences. Do NOT use the structured input
+tool for intake — ask in plain text and wait for a plain text answer.
 
-Then store `user.json`, copy `templates/` → root working files (`progress.json`, `PROGRESS.md`,
-`MY_SYSTEM.md`), and go straight to recommending Session 1. **Do not** ask for their role, their system,
-or "fun facts" at intake. The running example is introduced later (Session 1 Apply/Transfer): ask one
-short question — "in a sentence, what Claude system do you work on?" — and default to the house example
-(a support agent that looks up orders and issues refunds) if they don't have one.
+1. "What is your name?"
+2. "How much do you enjoy dry humor? Give me a number from 1 to 10, where 1 is keep it completely
+   straight and 10 is bring it on." (store in `user.json.joke_tolerance`)
+3. "Rate your comfort with each of these five topics, where 1 means you've just heard of it and 5 means
+   you use it every day. Give me five numbers like this: 2-1-2-1-5
+   - Agent loops and stop_reason
+   - Tools and MCP
+   - Claude Code config
+   - Prompting and schemas
+   - Context and reliability"
+   (store in `user.json.comfort`; if they give a single number, ask once: "I need one number per topic,
+   five total. For example: 2-1-2-1-5")
+4. "When are you hoping to take the exam? Type 1 for one month from now, 2 for two months, or 3 for
+   three months." (default 2 if they say unsure; store in `user.json.prep_timeline` and
+   `progress.json.course_meta.prep_timeline`. Same 13 sessions; only pace changes:
+   1 month = about 3 sessions/week, 2 months = 1-2/week, 3 months = 1/week.)
+
+After all four answers, **write all setup files in one go** — `user.json`, then copy `templates/` to
+root working files (`progress.json`, `PROGRESS.md`, `MY_SYSTEM.md`) — then immediately recommend
+Session 1. Do not interleave file writes with the conversation. **Do not** ask for their role, system,
+or anything else at intake. The running example is introduced later (Session 1 Apply/Transfer): ask
+"In a sentence, what Claude system do you work on?" and default to a customer support agent that
+looks up orders and issues refunds if they don't have one.
 
 **Use the stored prep timeline** on every "Continue"/"What's next"/review decision to pace the
 recommendation. Accept "change my prep timeline to X" and update both files.

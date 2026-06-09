@@ -20,7 +20,7 @@ allowed-tools:
 
 1. Check `progress.json`. If prior progress exists, offer to resume at the correct session instead of re-running onboarding.
 2. If the learner is brand new (or confirms restart):
-   - If `user.json` is missing, collect minimum setup: name + prep timeline (`1 month` / `2 months` / `3 months`). Write `user.json`. Copy templates → root working files (`progress.json`, `PROGRESS.md`, `MY_SYSTEM.md`) if not present.
+   - If `user.json` is missing, run the four intake questions from CLAUDE.md first-run setup — plain text, one at a time, no structured input tool. Collect all four answers, then write ALL setup files in one go: `user.json` + copy templates to root (`progress.json`, `PROGRESS.md`, `MY_SYSTEM.md`).
    - Run **Session 0** from `lessons/00-the-prime-directive.md`:
      - The Prime Directive + the 7 principles (brief overview — one line each)
      - Meet the nemeses (name the full roster from `course/COMPETENCY_MAP.md`; introduce 2–3 by name with a one-liner on their favourite trick)
