@@ -1,0 +1,95 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CCA Course: Start Or Resume",
+      "type": "shell",
+      "command": "node scripts/start-or-resume.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CCA Course: Show Course Controls",
+      "type": "shell",
+      "command": "node scripts/course-control.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CCA Course: Validate Package",
+      "type": "shell",
+      "command": "node scripts/validate-course.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CCA Course: Smoke Test Self-Contained Flow",
+      "type": "shell",
+      "command": "node scripts/smoke-test-course.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CCA Course: Runtime Proof Status",
+      "type": "shell",
+      "command": "node scripts/runtime-proof-status.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CCA Course: Validate Runtime Evidence",
+      "type": "shell",
+      "command": "node scripts/validate-runtime-evidence.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CCA Course: Build Share Package",
+      "type": "shell",
+      "command": "node scripts/build-share-package.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CCA Course: Build Share Zip",
+      "type": "shell",
+      "command": "node scripts/build-share-zip.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CCA Course: Validate Share Artifacts",
+      "type": "shell",
+      "command": "node scripts/validate-share-artifacts.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CCA Course: Reset Learner State",
+      "type": "shell",
+      "command": "node scripts/reset-course-state.js .",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

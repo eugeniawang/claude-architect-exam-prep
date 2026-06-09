@@ -1,0 +1,107 @@
+{
+  "name": "Architect on Call — CCA-F Exam Prep",
+  "version": "0.9",
+  "last_updated": "2026-06-09",
+  "delivery_engine": "Claude Code",
+  "runtime_adapters": ["CLAUDE.md"],
+  "built_with": "create-course",
+  "author": "Eugenia Wang",
+  "website": "https://kulanet.com",
+  "affiliation": "Independent and unofficial. Not affiliated with or endorsed by Anthropic.",
+  "audience": "solution architects preparing for the Claude Certified Architect - Foundations exam",
+  "goal": "Pass CCA-F (>=720/1000) and build durable understanding, by teaching 7 root principles welded to full task-statement coverage, drilled exam tokens, 72% gates, and a 4-of-6 timed mock. Self-contained, project-local, delivered in Claude Code.",
+  "build_mode": "brownfield-in-place",
+  "structure": {
+    "sessions_total": 13,
+    "sessions": "Session 0 (onboarding) + Sessions 1-12",
+    "phases": 4,
+    "phase_gate_pass_percent": 72,
+    "final_mock": "4 of the 6 official scenarios, picked at random, 72% pass",
+    "principles": 7,
+    "running_example": "MY_SYSTEM.md (the learner's own Claude system; capstone = its architecture brief)"
+  },
+  "prep_tracks": ["1 month", "2 months", "3 months"],
+  "primary_learner_prompts": ["Start", "Continue", "Mock exam", "Show my progress"],
+  "entrypoints": {
+    "setup": "/setup",
+    "start": "/start-course",
+    "resume": "/resume-course",
+    "start_session": "/start-session <0-12>",
+    "help": "/help",
+    "menu": "/course-menu",
+    "progress": "/progress",
+    "define": "/define",
+    "quiz_me": "/quiz-me",
+    "distractor_gauntlet": "/distractor-gauntlet",
+    "practice_exam": "/practice-exam",
+    "mock_exam": "/mock-exam",
+    "scenario_drill": "/scenario-drill",
+    "principle_map": "/principle-map",
+    "weak_areas": "/weak-areas",
+    "daily_review": "/daily-review",
+    "recap": "/recap",
+    "reference": "/reference",
+    "reset": "/reset-course-state"
+  },
+  "model_guidance": "Sonnet recommended. Static reference/ aids need no model. Haiku is fine for light review (definitions, recall, navigation, the static drills); judgment-heavy parts (grading scenarios, mock, remediation) are better on Sonnet. Opus unnecessary.",
+  "canonical_files": {
+    "runtime_adapter": "CLAUDE.md",
+    "lessons_index": "course/LESSONS.md",
+    "lessons_dir": "lessons/ (one file per session; loaded individually for low token use)",
+    "static_study_aids": "reference/ (principle-map.html card + distractor-gauntlet.html interactive quiz; no model needed)",
+    "source_of_truth": "course/SOURCE.md",
+    "coverage_matrix": "course/COMPETENCY_MAP.md",
+    "distractor_patterns": "course/DISTRACTOR-PATTERNS.md",
+    "glossary": "course/GLOSSARY.md",
+    "course_plan": "COURSE_PLAN.md",
+    "validation": "VALIDATION.md",
+    "landing_page": "index.html",
+    "syllabus": "study/SYLLABUS.md"
+  },
+  "templates": [
+    "templates/user.json",
+    "templates/progress.json",
+    "templates/PROGRESS.md",
+    "templates/MY_SYSTEM.md"
+  ],
+  "working_state_files": {
+    "note": "copied from templates/ to the course root on first-run setup",
+    "files": ["user.json", "progress.json", "PROGRESS.md", "MY_SYSTEM.md"]
+  },
+  "source_materials": {
+    "canonical_digest": "course/SOURCE.md",
+    "exam_overview": "sources/anthropic/exam-overview.md",
+    "exam_overview": "sources/anthropic/exam-overview.md",
+    "link_hub": "sources/anthropic/links.md"
+  },
+  "status_line": {
+    "scope": "project-only",
+    "hook": ".claude/hooks/cca-course-statusline.js",
+    "shows": ["lesson position", "sessions completed", "cumulative active time", "readiness percent", "rotating quip"]
+  },
+  "spinner_verbs": {
+    "scope": "project-only",
+    "file": ".claude/settings.json",
+    "mode": "replace"
+  },
+  "global_setup_required": false,
+  "self_contained": true,
+  "completion_tracking": {
+    "enabled": true,
+    "state_file": "progress.json",
+    "completion_fields": [
+      "completion_status",
+      "course_completed",
+      "course_completed_at",
+      "last_completed_item",
+      "readiness.percent"
+    ],
+    "completion_rule": "course_completed=true only after all phase gates AND the final 4-of-6 mock are cleared at >=72%, with MY_SYSTEM.md architecture brief finished"
+  },
+  "delivery_model": {
+    "project_local_runtime": true,
+    "project_only_status_line": true,
+    "no_global_install": true
+  },
+  "legacy_note": "Earlier files (session-guides/, workbooks/, labs/, learner/, CHECKPOINTS.md, COMPETENCY-CHECKS.md, REVIEW-SYSTEM.md, study/OFFICIAL-EXAM-ANCHORS.md, study/SKILLS-MATRIX.md, study/DOMAIN-MAP.md, study/SCENARIOS.md, and the legacy maintainer scripts/) are superseded by the canonical files above and retained as reference only."
+}

@@ -1,0 +1,71 @@
+{
+  "course": "Architect on Call — CCA-F Exam Prep",
+  "version": 4,
+  "current_session": 0,
+  "navigation": {
+    "mode": "sequential",
+    "recommended_mode": "sequential",
+    "allow_jump_ahead": true,
+    "jump_history": []
+  },
+  "course_meta": {
+    "build_mode": "brownfield-in-place",
+    "intake_template": "goal-led",
+    "goal_type": "specific outcome + durable capability",
+    "course_goals": [
+      "internalize the 7 root principles so any anti-pattern/scenario is re-derivable",
+      "cold-recall every exam-tested token",
+      "justify scenario choices against distractors under exam format",
+      "pass a 4-of-6 timed mock at the real bar"
+    ],
+    "success_criteria": [
+      "explains each principle plainly (Feynman)",
+      "names the violated principle in any scenario",
+      "clears 72% phase gates",
+      "passes final 4-of-6 mock",
+      "ships a personal architecture brief in MY_SYSTEM.md"
+    ],
+    "out_of_scope": [
+      "fine-tuning/training, billing/auth, MCP hosting, computer use, vision, streaming, pricing, tokenization (see SOURCE.md out-of-scope list)"
+    ],
+    "delivery_environment": "claude-code",
+    "source_boundary": "SOURCE.md (official Anthropic guide v0.1) is canonical",
+    "capstone": "architecture brief for the learner's own system + final mock",
+    "prep_timeline": "",
+    "pass_bar_percent": 72
+  },
+  "readiness": {
+    "percent": 0,
+    "last_mock_score": null,
+    "last_updated": null
+  },
+  "review_queue": [],
+  "parking_lot": [],
+  "competency_progress": {},
+  "completion_status": "not_started",
+  "course_completed": false,
+  "course_completed_at": null,
+  "last_completed_item": null,
+  "time_tracking": {
+    "enabled": true,
+    "mode": "active_learning_time",
+    "total_active_minutes": 0,
+    "current_timer": { "running": false, "session_id": null, "started_at": null, "paused_at": null },
+    "log": []
+  },
+  "sessions": [
+    { "id": 0, "title": "The Prime Directive (and meeting your nemeses)", "phase": "Phase 0: Onboarding", "domains": ["meta"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md"], "notes": "" },
+    { "id": 1, "title": "Agentic Loops & stop_reason", "phase": "Phase 1: The Agent's Spine", "domains": ["D1"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D1.1"], "notes": "" },
+    { "id": 2, "title": "Multi-Agent Orchestration & Context Isolation", "phase": "Phase 1: The Agent's Spine", "domains": ["D1"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D1.2-1.7"], "notes": "" },
+    { "id": 3, "title": "Hooks, Enforcement & Handoff", "phase": "Phase 1: The Agent's Spine", "domains": ["D1"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D1.4-1.5"], "notes": "", "gate": "Phase 1 gate (72%)" },
+    { "id": 4, "title": "Tool Design & Structured Errors", "phase": "Phase 2: Tools, Code & Context", "domains": ["D2"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D2.1-2.3"], "notes": "" },
+    { "id": 5, "title": "MCP & Built-in Tools", "phase": "Phase 2: Tools, Code & Context", "domains": ["D2"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D2.4-2.5"], "notes": "" },
+    { "id": 6, "title": "Claude Code Config: CLAUDE.md, Commands, Skills, Rules", "phase": "Phase 2: Tools, Code & Context", "domains": ["D3"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D3.1-3.3"], "notes": "" },
+    { "id": 7, "title": "Plan Mode, Iteration & CI/CD", "phase": "Phase 2: Tools, Code & Context", "domains": ["D3", "D4"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D3.4-3.6, D4.5-4.6"], "notes": "", "gate": "Phase 2 gate (72%)" },
+    { "id": 8, "title": "Explicit Criteria & Few-Shot", "phase": "Phase 3: Prompting, Reliability & Context", "domains": ["D4"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D4.1-4.2"], "notes": "" },
+    { "id": 9, "title": "Structured Output & Validation-Retry", "phase": "Phase 3: Prompting, Reliability & Context", "domains": ["D4"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D4.3-4.4"], "notes": "" },
+    { "id": 10, "title": "Context Management & Reliability", "phase": "Phase 3: Prompting, Reliability & Context", "domains": ["D5"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D5.1,5.4,5.5"], "notes": "" },
+    { "id": 11, "title": "Escalation, Error Propagation & Provenance", "phase": "Phase 3: Prompting, Reliability & Context", "domains": ["D5"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md §D5.2,5.3,5.6"], "notes": "", "gate": "Phase 3 gate (72%)" },
+    { "id": 12, "title": "Capstone: Architect on Call — the Final Shift", "phase": "Phase 4: Capstone", "domains": ["all"], "status": "not_started", "checkpoints": [], "check_result": null, "active_minutes": 0, "started_at": null, "completed_at": null, "time_log": [], "weak_concepts": [], "misconceptions": [], "retry_status": "not_needed", "recommended_next_action": "start_session", "source_anchors": ["SOURCE.md", "COMPETENCY_MAP.md"], "notes": "", "gate": "Final mock — 4 of 6 scenarios (72%)" }
+  ]
+}

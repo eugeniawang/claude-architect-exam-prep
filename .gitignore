@@ -1,0 +1,6 @@
+.DS_Store
+dist/
+.claude/.DS_Store
+.claude/skills/.DS_Store
+sources/.DS_Store
+_bmad

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CCA-F · The 7 Principles & Nemesis Map</title>
+<style>
+  :root{
+    --bg:#f7f1e8; --card:#fffaf3; --ink:#2f241c; --muted:#6b5a4a;
+    --line:#e2d3bf; --accent:#8a4f2b; --accent2:#2f1f16; --good:#2f6f4f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.5 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 22px 56px}
+  header.top{border-bottom:2px solid var(--line);padding-bottom:14px;margin-bottom:22px}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  h1{font-size:28px;margin:.2em 0 .1em}
+  .sub{color:var(--muted);margin:0}
+  .prime{background:var(--accent2);color:#fbf6ee;border-radius:14px;padding:16px 18px;margin:20px 0 26px}
+  .prime b{color:#fff}
+  .prime .small{color:#cdb8a2;font-size:13.5px;margin-top:6px}
+  h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:26px 0 12px}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .p{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .p .id{display:inline-block;font-weight:800;color:#fff;background:var(--accent);
+    border-radius:7px;padding:1px 9px;font-size:13px;margin-bottom:6px}
+  .p .t{font-weight:700;display:block;margin-bottom:3px}
+  .p .w{color:var(--muted);font-size:14px}
+  table{width:100%;border-collapse:collapse;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+  th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line)}
+  th{background:#f1e6d6;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  code{background:#efe3d2;border-radius:5px;padding:1px 5px;font-size:13px;
+    font-family:ui-monospace,Menlo,Consolas,monospace}
+  .tok{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .tok .box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px}
+  .tok .box h3{margin:0 0 6px;font-size:14px;color:var(--accent2)}
+  .tok .box p{margin:0;font-size:13.5px;color:var(--muted)}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:12.5px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none;padding:0}
+    .p,.tok .box,table{break-inside:avoid} .prime{background:#2f1f16 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+  @media(max-width:640px){.grid,.tok{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">Architect on Call · CCA-F reference card</div>
+    <h1>The 7 Principles &amp; Nemesis Map</h1>
+    <p class="sub">Every exam anti-pattern is one principle, violated. Learn the seven; re-derive the rest.</p>
+  </header>
+
+  <div class="prime">
+    <b>The Prime Directive.</b> The LLM is one <b>probabilistic</b> component in a system. Architecture is everything you wrap around it.
+    <div class="small">Right answers reach for the <b>systems fix</b> (control, context, verification, structure). Wrong answers “ask the model harder” (better prompt, more retries, self-confidence, sentiment) or over-build (a classifier, a fine-tune, a bigger model).</div>
+  </div>
+
+  <h2>The seven root principles</h2>
+  <div class="grid">
+    <div class="p"><span class="id">P1</span><span class="t">Determinism for the correctness-critical; the model for judgment.</span><span class="w">Put code where being wrong is costly. Money/compliance/safety → a hook or gate, not a prompt.</span></div>
+    <div class="p"><span class="id">P2</span><span class="t">Context is a finite, ordered, decaying working set — not memory.</span><span class="w">The model knows only what's in the window, where it sits, and in what form. Curate it.</span></div>
+    <div class="p"><span class="id">P3</span><span class="t">Match the mechanism to the problem's shape and cost.</span><span class="w">Proportionate beats clever. Fix the root cause, not a symptom.</span></div>
+    <div class="p"><span class="id">P4</span><span class="t">Make failure legible.</span><span class="w">Distinguish failure types; propagate structured error context so the system can recover.</span></div>
+    <div class="p"><span class="id">P5</span><span class="t">Verification independent of generation; measurement disaggregated.</span><span class="w">The producer trusts itself. An average hides the failures that matter.</span></div>
+    <div class="p"><span class="id">P6</span><span class="t">Decomposition needs complete coverage and managed seams.</span><span class="w">Specialise — but cover the whole problem and manage the handoffs (context, provenance).</span></div>
+    <div class="p"><span class="id">P7</span><span class="t">Preserve provenance and uncertainty.</span><span class="w">Never silently collapse conflict or drop where a claim came from.</span></div>
+  </div>
+
+  <h2>Nemesis → the principle it breaks</h2>
+  <table>
+    <tr><th>Nemesis</th><th>The crime</th><th>Breaks</th></tr>
+    <tr><td>The Text Whisperer</td><td>reads the model's words to decide when to stop the loop</td><td>P1</td></tr>
+    <tr><td>The Polite Asker</td><td>asks the model to obey a business rule instead of enforcing it</td><td>P1</td></tr>
+    <tr><td>The Sentiment-Based Escalator</td><td>escalates on frustration, not actual complexity</td><td>P1 · P5</td></tr>
+    <tr><td>The Hoarder / The Mumbler</td><td>18 tools on one agent · vague overlapping descriptions</td><td>P3</td></tr>
+    <tr><td>The Sledgehammer</td><td>plan mode / a classifier for a one-line job</td><td>P3</td></tr>
+    <tr><td>The Eternal Retrier</td><td>retries for data the source never contained</td><td>P3 · P4</td></tr>
+    <tr><td>Old Faithful Failure</td><td>returns “Operation failed” and nothing else</td><td>P4</td></tr>
+    <tr><td>The Self-Marker</td><td>reviews its own work in the same session</td><td>P5</td></tr>
+    <tr><td>The Average-Hider</td><td>reports 97% while one document type sits at 0%</td><td>P5</td></tr>
+    <tr><td>The Mind-Reader / Narrow Decomposer</td><td>assumes subagents inherit context · splits a task so it misses areas</td><td>P2 · P6</td></tr>
+    <tr><td>The Summarizer of Doom</td><td>condenses exact amounts &amp; dates into a vague blur</td><td>P2</td></tr>
+    <tr><td>The Silent Reconciler</td><td>quietly picks one of two conflicting sources</td><td>P7</td></tr>
+  </table>
+
+  <h2>Exam tokens, by domain (recognise on sight)</h2>
+  <div class="tok">
+    <div class="box"><h3>D1 · Agentic (27%)</h3><p><code>stop_reason</code> (<code>tool_use</code>→continue, <code>end_turn</code>→stop, <code>max_tokens</code>) · <code>Task</code> + <code>allowed_tools</code> incl. <code>"Task"</code> · <code>fork_session</code> · <code>--resume</code> · <code>PreToolUse</code>/<code>PostToolUse</code> hooks</p></div>
+    <div class="box"><h3>D2 · Tools &amp; MCP (18%)</h3><p><code>isError</code>/<code>errorCategory</code>/<code>isRetryable</code> · <code>tool_choice</code> auto/any/forced · 4–5 tools (not 18) · <code>.mcp.json</code> vs <code>~/.claude.json</code> · <code>${ENV_VAR}</code> · Grep=content, Glob=names</p></div>
+    <div class="box"><h3>D3 · Claude Code (20%)</h3><p>CLAUDE.md hierarchy · <code>@import</code> · <code>.claude/rules/</code> <code>paths:</code> · <code>context: fork</code> skills · plan vs direct · <code>-p</code> + <code>--output-format json</code> + <code>--json-schema</code></p></div>
+    <div class="box"><h3>D4 · Prompting (20%)</h3><p>explicit criteria &gt; “be conservative” · 2–4 few-shot + edge case · <code>tool_use</code>+schema (shape ≠ semantics) · retry-with-error (useless if data absent) · Batch API 50%/<code>custom_id</code></p></div>
+    <div class="box"><h3>D5 · Context &amp; Reliability (15%)</h3><p>lost-in-the-middle · case-facts block · <code>/compact</code> · escalate on policy gap / explicit request / no-progress (NOT sentiment) · access-failure ≠ empty result · claim→source provenance</p></div>
+    <div class="box"><h3>The exam, in one move</h3><p>Spot the option that “asks the model harder” or over-builds — eliminate it. The calm, deterministic, root-cause fix almost always wins.</p></div>
+  </div>
+
+  <footer>
+    Architect on Call — an independent CCA-F prep course by Eugenia Wang (kulanet.com). Source of truth: the official Anthropic exam guide. Print to PDF for a one-page revision sheet. Not affiliated with Anthropic.
+  </footer>
+</div>
+</body>
+</html>

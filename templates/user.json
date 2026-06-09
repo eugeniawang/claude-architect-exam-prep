@@ -1,0 +1,26 @@
+{
+  "name": "",
+  "joke_tolerance": 0,
+  "_joke_tolerance_scale": "1-10; how dry/cheeky the spinner and the occasional aside can be",
+  "comfort": {
+    "agent_loops": 0,
+    "tools_and_mcp": 0,
+    "claude_code_config": 0,
+    "prompting_and_schemas": 0,
+    "context_and_reliability": 0
+  },
+  "_comfort_scale": "1 = brand new, 5 = comfortable; calibrates depth per domain",
+  "prep_timeline": "",
+  "_prep_timeline_scale": "1 month | 2 months | 3 months (drives pacing + review spacing)",
+  "target_exam": "Claude Certified Architect - Foundations",
+  "target_exam_date": "",
+  "running_system": {
+    "_note": "NOT asked at intake. Captured in one short question during Session 1; defaults to the house example (a support agent that looks up orders and issues refunds).",
+    "one_line": ""
+  },
+  "beginner_first": true,
+  "navigation_preference": "sequential",
+  "delivery_environment": "claude-code",
+  "created": "",
+  "version": 3
+}

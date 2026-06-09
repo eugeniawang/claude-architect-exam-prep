@@ -1,0 +1,29 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "node .claude/hooks/cca-course-statusline.js"
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "You've got this",
+      "Locking in",
+      "Cooking",
+      "Doing the thing",
+      "Believing in you (genuinely)",
+      "Crushing it, allegedly",
+      "Being so normal about this",
+      "Trying my best",
+      "Hyping you up",
+      "Powering through",
+      "Manifesting a pass",
+      "Putting in the reps",
+      "Almost certainly nearly done",
+      "Thinking responsibly",
+      "Earning my keep",
+      "Staying humble, working hard",
+      "Vibing professionally",
+      "Rooting for you"
+    ]
+  }
+}

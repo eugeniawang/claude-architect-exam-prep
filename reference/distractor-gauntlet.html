@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CCA-F · The Distractor Gauntlet</title>
+<style>
+  :root{--bg:#f7f1e8;--card:#fffaf3;--ink:#2f241c;--muted:#6b5a4a;--line:#e2d3bf;
+    --accent:#8a4f2b;--accent2:#2f1f16;--good:#2f6f4f;--goodbg:#e7f1ea;--bad:#a23b2c;--badbg:#f6e6e2;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.55 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:720px;margin:0 auto;padding:26px 20px 60px}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  h1{font-size:26px;margin:.15em 0 .1em}
+  .sub{color:var(--muted);margin:0 0 18px}
+  .bar{display:flex;gap:10px;align-items:center;justify-content:space-between;
+    background:var(--accent2);color:#fbf6ee;border-radius:12px;padding:10px 16px;margin-bottom:18px;font-size:14px}
+  .bar b{color:#fff}
+  .pill{background:#3c2a1d;border-radius:20px;padding:3px 11px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 20px}
+  .qnum{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .stem{font-size:17px;margin:6px 0 16px}
+  code{background:#efe3d2;border-radius:5px;padding:1px 5px;font-size:.9em;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);
+    border-radius:11px;padding:12px 14px;margin:8px 0;font:inherit;color:inherit;cursor:pointer;transition:.12s}
+  .opt:hover:not(:disabled){border-color:var(--accent)}
+  .opt:disabled{cursor:default}
+  .opt .lab{font-weight:700;margin-right:7px;color:var(--accent)}
+  .opt.correct{background:var(--goodbg);border-color:var(--good)}
+  .opt.wrong{background:var(--badbg);border-color:var(--bad)}
+  .why{margin-top:6px;font-size:13.5px;color:var(--muted);display:none}
+  .opt.revealed .why{display:block}
+  .verdict{margin-top:14px;padding:12px 14px;border-radius:11px;font-size:14.5px;display:none}
+  .verdict.show{display:block}
+  .verdict.win{background:var(--goodbg);border:1px solid var(--good)}
+  .verdict.lose{background:var(--badbg);border:1px solid var(--bad)}
+  .verdict .tag{font-weight:700}
+  .next{margin-top:16px;background:var(--accent);color:#fff;border:none;border-radius:10px;
+    padding:11px 20px;font:inherit;font-weight:700;cursor:pointer}
+  .next:hover{background:#5a321b}
+  .done{text-align:center;padding:30px 10px}
+  .done .score{font-size:44px;font-weight:800;color:var(--accent2)}
+  .done .msg{color:var(--muted);margin:6px 0 18px}
+  footer{margin-top:26px;color:var(--muted);font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Architect on Call · CCA-F</div>
+  <h1>The Distractor Gauntlet</h1>
+  <p class="sub">One scenario at a time. Pick the systems answer, then see why the tempting ones are wrong. No model runs here — it's all in your browser.</p>
+
+  <div class="bar">
+    <span>Question <b id="qpos">1</b> / <b id="qtot">6</b></span>
+    <span class="pill">Score <b id="score">0</b></span>
+    <span class="pill">🔥 Streak <b id="streak">0</b></span>
+  </div>
+
+  <div id="stage"></div>
+
+  <footer>Static demo · client-side only · part of the Architect on Call CCA-F course by Eugenia Wang (kulanet.com). Grounded in the official Anthropic sample questions. Not affiliated with Anthropic.</footer>
+</div>
+
+<script>
+const Q = [
+  {
+    stem: "Production shows your support agent skips <code>get_customer</code> 12% of the time and acts on the customer's stated name — sometimes refunding the wrong account. Most effective fix?",
+    opts: [
+      {t:"Add a programmatic prerequisite that blocks <code>lookup_order</code> and <code>process_refund</code> until <code>get_customer</code> returns a verified ID.", ok:true, why:"Right. Identity-before-money is correctness-critical, so enforce it in code (a gate). Deterministic — can't be talked out of it."},
+      {t:"Strengthen the system prompt to say verification is mandatory.", ok:false, why:"Asking the model harder. A prompt has a non-zero failure rate; it can't guarantee the rule."},
+      {t:"Add few-shot examples of always calling <code>get_customer</code> first.", ok:false, why:"Still probabilistic, and adds token overhead without a guarantee."},
+      {t:"Add a routing classifier that enables tools per request type.", ok:false, why:"Solves tool availability, not tool ordering — the wrong problem."}
+    ],
+    tag:"P1 · The Polite Asker"
+  },
+  {
+    stem: "Your agent calls <code>get_customer</code> when users ask about orders. Both tools have minimal, near-identical descriptions. Best <em>first</em> step?",
+    opts: [
+      {t:"Expand each tool's description with input formats, example queries, edge cases, and when to use it vs the other.", ok:true, why:"Right. Descriptions are the primary thing the model selects on. This fixes the root cause cheaply."},
+      {t:"Add 5–8 few-shot examples of correct routing.", ok:false, why:"Token overhead that patches the symptom, not the vague descriptions."},
+      {t:"Add a keyword-parsing routing layer before the model.", ok:false, why:"Over-engineered, and bypasses the model's own selection."},
+      {t:"Consolidate both into one <code>lookup_entity</code> tool.", ok:false, why:"A valid bigger refactor — but heavier than a 'first step' warrants."}
+    ],
+    tag:"P3 · The Mumbler"
+  },
+  {
+    stem: "Your agent escalates easy cases and tries to handle hard policy-exception cases itself — first-contact resolution is well below target. Best way to fix escalation?",
+    opts: [
+      {t:"Add explicit escalation criteria with few-shot examples of when to escalate vs resolve.", ok:true, why:"Right. The boundary is unclear; concrete criteria fix it before adding infrastructure."},
+      {t:"Have the agent score its own confidence 1–10 and escalate when low.", ok:false, why:"LLM self-confidence is poorly calibrated — it's already confidently wrong on the hard cases."},
+      {t:"Escalate whenever sentiment analysis detects frustration.", ok:false, why:"Sentiment ≠ complexity. The classic trap. Escalate on policy gaps / explicit requests / no progress."},
+      {t:"Train a separate classifier on historical tickets.", ok:false, why:"Over-engineered before prompt optimisation has even been tried."}
+    ],
+    tag:"P1 · P5 · The Sentiment-Based Escalator"
+  },
+  {
+    stem: "Your multi-agent research system runs fine — each subagent succeeds — but the final report misses whole sub-topics. The coordinator's log shows it split the topic into three narrow subtasks. Root cause?",
+    opts: [
+      {t:"The coordinator's task decomposition is too narrow, so the subagents never cover all the relevant areas.", ok:true, why:"Right. The subagents did their jobs; the problem is what they were assigned. Coverage is a decomposition failure."},
+      {t:"The synthesis agent lacks instructions to spot coverage gaps.", ok:false, why:"Blames a downstream agent that's working within its scope."},
+      {t:"The web-search agent's queries aren't broad enough.", ok:false, why:"Same — it correctly executed a too-narrow assignment."},
+      {t:"The document agent is over-filtering sources.", ok:false, why:"No evidence; again blames a correctly-working part."}
+    ],
+    tag:"P6 · The Narrow Decomposer"
+  },
+  {
+    stem: "A subagent's web search times out. How should that failure reach the coordinator so it can recover well?",
+    opts: [
+      {t:"Return structured error context: failure type, the attempted query, any partial results, and possible alternatives.", ok:true, why:"Right. Legible failure lets the coordinator decide: retry, try another route, or proceed with partial results."},
+      {t:"Retry with backoff, then return a generic “search unavailable”.", ok:false, why:"The generic status hides the context the coordinator needs."},
+      {t:"Catch the timeout and return an empty result marked successful.", ok:false, why:"Silent suppression — an access failure is not an empty result."},
+      {t:"Propagate the exception and terminate the whole workflow.", ok:false, why:"Over-reaction; kills recoverable work."}
+    ],
+    tag:"P4 · Old Faithful Failure"
+  },
+  {
+    stem: "Your CI job runs <code>claude \"Analyze this PR\"</code> and hangs forever waiting for input. Correct way to run Claude Code in a pipeline?",
+    opts: [
+      {t:"Add the <code>-p</code> (print) flag for non-interactive mode.", ok:true, why:"Right. <code>-p</code>/<code>--print</code> runs once, prints, and exits — exactly what CI needs."},
+      {t:"Set an environment variable <code>CLAUDE_HEADLESS=true</code>.", ok:false, why:"Not a real flag. Invented-feature distractor."},
+      {t:"Redirect stdin from <code>/dev/null</code>.", ok:false, why:"A Unix hack that doesn't address Claude Code's actual mode."},
+      {t:"Add a <code>--batch</code> flag.", ok:false, why:"Not the mechanism for non-interactive runs; also not a real flag here."}
+    ],
+    tag:"P3 · fabricated-feature trap"
+  }
+];
+
+let i=0, score=0, streak=0;
+const $=id=>document.getElementById(id);
+$("qtot").textContent = Q.length;
+
+function render(){
+  const q=Q[i];
+  $("qpos").textContent=i+1;
+  const stage=$("stage");
+  stage.innerHTML="";
+  const card=document.createElement("div"); card.className="card";
+  card.innerHTML=`<div class="qnum">Scenario ${i+1}</div><div class="stem">${q.stem}</div>`;
+  const labels=["A","B","C","D"];
+  q.opts.forEach((o,idx)=>{
+    const b=document.createElement("button");
+    b.className="opt"; b.innerHTML=`<span class="lab">${labels[idx]}</span>${o.t}<div class="why">${o.why}</div>`;
+    b.onclick=()=>choose(idx,b,card,q);
+    card.appendChild(b);
+  });
+  const v=document.createElement("div"); v.className="verdict"; v.id="verdict"; card.appendChild(v);
+  stage.appendChild(card);
+}
+
+function choose(idx,btn,card,q){
+  const buttons=[...card.querySelectorAll(".opt")];
+  buttons.forEach((b,j)=>{
+    b.disabled=true; b.classList.add("revealed");
+    if(q.opts[j].ok) b.classList.add("correct");
+    if(j===idx && !q.opts[j].ok) b.classList.add("wrong");
+  });
+  const right=q.opts[idx].ok;
+  if(right){ score++; streak++; } else { streak=0; }
+  $("score").textContent=score; $("streak").textContent=streak;
+  const v=$("verdict");
+  v.className="verdict show "+(right?"win":"lose");
+  v.innerHTML=(right?"✅ Nailed it. ":"✗ That's a distractor. ")+`<span class="tag">${q.tag}</span>`+
+    (right?" — you spotted the systems fix.":" — re-read the green option; that's the systems fix.");
+  const nb=document.createElement("button"); nb.className="next";
+  nb.textContent = i<Q.length-1 ? "Next scenario →" : "See result";
+  nb.onclick=()=>{ i++; i<Q.length ? render() : finish(); };
+  v.appendChild(document.createElement("div"));
+  v.appendChild(nb);
+}
+
+function finish(){
+  const pct=Math.round(score/Q.length*100);
+  const pass=pct>=72;
+  const msg = pass ? "At or above the 72% bar. You're reading scenarios like the exam wants."
+                   : "Below the 72% bar. Re-run the gauntlet and watch for the 'ask-the-model-harder' option.";
+  $("stage").innerHTML=`<div class="card done"><div class="score">${score}/${Q.length} · ${pct}%</div>
+    <div class="msg">${msg}</div>
+    <button class="next" onclick="i=0;score=0;streak=0;document.getElementById('score').textContent=0;document.getElementById('streak').textContent=0;render()">Run it again</button></div>`;
+}
+render();
+</script>
+</body>
+</html>
